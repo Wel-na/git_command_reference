@@ -1039,7 +1039,8 @@ Cette commande crée une paire de clés dans le dossier `~/.ssh/`, exemple :
 * clé privée → `~/.ssh/id_ed25519` (à ne jamais partager)  
 * clé publique → `~/.ssh/id_ed25519.pub` 
 ```bash
-ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "clé GitHub travail mon@email.com"
+ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Super poste"
+ssh-keygen -o -a 100 -t ed25519 -b 2048 -m PEM -f ~/.ssh/id_ed25519
 ```
 > Tu seras invité à entrer une passphrase. Cela protège ta clé privée car si quelqu’un la récupère (non protégée) = accès direct sans protection.  
 > **Détails rapides :**  
@@ -1299,7 +1300,6 @@ Commands:
 
 \---
 
-## 📄 Licence
-[6net7]  
-Ce dépôt est proposé comme un aide-mémoire pédagogique dédié à Git, GitHub et SSH.  
+## 📄 [6net7]  
+Ce dépôt est proposé comme un aide-mémoire dédié à Git, GitHub et SSH.  
 Il a pour objectif de faciliter l’apprentissage, la révision et l’application des bonnes pratiques en gestion de version.
