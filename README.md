@@ -1039,27 +1039,24 @@ Cette commande crée une paire de clés dans le dossier `~/.ssh/`, exemple :
 * clé privée → `~/.ssh/id_ed25519` (à ne jamais partager)  
 * clé publique → `~/.ssh/id_ed25519.pub` 
 ```bash
-ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "Super poste"
-ssh-keygen -o -a 100 -t ed25519 -b 2048 -m PEM -f ~/.ssh/id_ed25519
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "Super poste"
 ```
 > Tu seras invité à entrer une passphrase. Cela protège ta clé privée car si quelqu’un la récupère (non protégée) = accès direct sans protection.  
 > **Détails rapides :**  
 > * `-t ed25519` → type de clé moderne et sécurisé  
 > * `-f ~/.ssh/id_ed25519` → emplacement du fichier  
-> * `-C "serveur-production"` → sert juste de commentaire (pour identifier la clé)  
-> * `-o` → utilise un **format de clé privé moderne** (plus sécurisé)  
-> * `-a 100` → niveau de protection de la clé (plus c'est plus fort, plus c'est long à taper). Rend les attaques par brute-force plus difficiles.  
+> * `-C "serveur-test"` → sert juste de commentaire (pour identifier la clé)  
 > **Résultat** : une paire de clés (publique + privée) pour t’authentifier, par exemple sur GitHub sans mot de passe.
 
 ### Copier la clé publique  
-Utilise la commande suivante pour afficher le contenu de la clé publique.  
+Afficher le contenu de la clé publique.  
 Linux / Windows (Git Bash / PowerShell) :
 ```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 > 👉 Copie le contenu (ça commence par `ssh-ed25519 ...`) sans le commentaire.
 
-### Ajouter la clé sur GitHub
+Ajouter la clé sur GitHub
 1. Va sur GitHub
 2. Clique sur ta photo → **Settings**
 3. **SSH and GPG keys**
@@ -1069,6 +1066,13 @@ cat ~/.ssh/id_ed25519.pub
     * Key Type : Authentication Key
     * Key : colle ta clé publique
 6. Clique **Add SSH key**
+
+### Copier la clé publique sur une machine distant
+Vous vous connectez souvent par ssh de la machine A vers la machine B. Vous voulez avoir la possibilité de le faire sans donner de mot de passe.
+```bash
+ssh-keygen
+ssh-copy-id utilisateur@machineB
+```
 
 ### Configurer l'agent SSH pour éviter de retaper la passphrase tout le temps
 Mettre une passphrase protège ta clé privée mais tu dois la saisir…   
