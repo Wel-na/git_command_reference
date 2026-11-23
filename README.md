@@ -1116,13 +1116,10 @@ ssh-add -l
 1. Activer le service
 ```bash
 Get-Service ssh-agent | Set-Service -StartupType Automatic
-```
-```bash
 Start-Service ssh-agent
 ```
 
 2. Ajouter la clé
-Vérifie ensuite :
 ```bash
 ssh-add $env:USERPROFILE\.ssh\id_ed25519
 ```
@@ -1131,6 +1128,15 @@ ssh-add $env:USERPROFILE\.ssh\id_ed25519
 Voir les clés actives dans **ssh-agent** :
 ```bash
 ssh-add -l
+```
+
+Pour vous assurer que Git utilise l’agent où vous avez stocké vos informations d’identification, forcez Git à utiliser le fichier binaire SSH du système en exécutant :
+```bash
+git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+```
+Vous devrez peut-être spécifier le ssh-keygen fichier Git binaire à utiliser pour éviter les conflits avec le fichier binaire groupé avec Git pour Windows. Pour définir le fichier binaire utilisé, exécutez la commande suivante :
+```bash
+git config --global gpg.ssh.program "C:/Windows/System32/OpenSSH/ssh-keygen.exe"
 ```
 
 ✔️ Git Bash (alternative)
@@ -1186,11 +1192,8 @@ rm ~/.ssh/id_ed25519.pub
 
 ```bash id="a7v2qm"
 ssh-add -d ~/.ssh/id_ed25519
-```
 
-👉 ou tout vider :
-
-```bash id="m3x8wp"
+# ou tout vider :
 ssh-add -D
 ```
 
